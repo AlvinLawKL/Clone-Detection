@@ -14,7 +14,7 @@ public class ConnectDB {
 
         // Establish the connection to the database 
         String serverName = "localhost";
-        String databaseName = "clone_detection";
+        String databaseName = "tool_time";
         String url = "jdbc:postgresql://" + serverName + "/" + databaseName + "?autoReconnect=true&useSSL=false"; 
 
         String username = "postgres";

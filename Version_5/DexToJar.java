@@ -10,18 +10,20 @@ import java.util.List;
 
 public class DexToJar {
 
-	//Path to use dex2jar program
-	static String d2jLocation = "/Users/Alvin/Desktop/Clone Detection/dex2jar-2.0/d2j-dex2jar.sh";
+	// Path to use dex2jar program
+	static String d2jLocation;
 
-	//Apply toJar method to all .dex files in a given directory
-	public static void toJarAll(String dirPath) {
+	// Apply toJar method to all .dex files in a given directory
+	public static void toJarAll(String dirPath, String d2j) {
+		d2jLocation = d2j;
+
 		File dir = new File(dirPath);
         File[] fileList = dir.listFiles();
         if (fileList != null) {
             for (File file: fileList) {
             	String filePath = file.getAbsolutePath();
             	if (file.isDirectory()) {
-            		toJarAll(filePath);
+            		toJarAll(filePath,d2j);
             	}
                 else if (filePath.endsWith(".dex")) {
                     toJar(filePath);
@@ -30,6 +32,7 @@ public class DexToJar {
         }
 	}
 
+	// Convert .dex file into .jar file
 	private static void toJar(String dexFilePath) {
 		System.out.println("dex2jar: " + dexFilePath);
 		try {
@@ -42,7 +45,6 @@ public class DexToJar {
 			pb.directory(outputDir);
 			Process p = pb.start();
 			p.waitFor();
-
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

@@ -14,12 +14,13 @@ import java.lang.Class;
 public class ClassStructure {
 
 	//Path to use javap program, use to get class structure from .class file
-	static String javapLocation = "/Library/Java/JavaVirtualMachines/jdk1.8.0_101.jdk/Contents/Home/bin/javap";
+	static String javapLocation;
 
-	public static ArrayList<String> getApp(String path,String appPathOnly) {
+	public static ArrayList<String> getApp(String path,String appPathOnly, String javap) {
 		// path -- path of folder to apply this method
 		// appPathOnly(Y/N) -- "N" to get the class structures
 
+		javapLocation = javap;
 		ArrayList<String> appLists = new ArrayList<String>();
 		File dir = new File(path);
         File[] fileList = dir.listFiles();
@@ -39,7 +40,7 @@ public class ClassStructure {
 					
                 }
 				else if (file.isDirectory()) {
-					ArrayList<String> appLists2 = getApp(filePath,appPathOnly);
+					ArrayList<String> appLists2 = getApp(filePath,appPathOnly,javap);
 					appLists.addAll(appLists2);
 				}
             }

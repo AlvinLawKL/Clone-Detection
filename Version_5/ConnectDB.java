@@ -57,16 +57,4 @@ public class ConnectDB {
         }
       }
     }
-
-    public static ResultSet runQuery(Connection connection,String query) {
-      try {
-        Statement command = connection.createStatement();
-        ResultSet result = command.executeQuery(query);
-        return result;
-      } catch (Exception e) {
-        System.err.println(e);
-        return null;
-      }
-    }
-
 }

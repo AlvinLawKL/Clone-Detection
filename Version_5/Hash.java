@@ -16,8 +16,9 @@ import org.apache.commons.io.FileUtils;
 public class Hash {
 
     static HashMap<String,ArrayList<String>> classesHash = new HashMap<String,ArrayList<String>>();
+    // Key -- Absolute path of a class file
+    // Value -- Used to store two strings: 1) Hash value of the class file's class signature 2) Absolute path of the corresponding application
 
-    //Look for files in directory to hash, then compare result
     public static HashMap<String,ArrayList<String>> hashAll(ArrayList<String> appLists) {
         ClassStructure classStructure = new ClassStructure();
 
@@ -37,6 +38,7 @@ public class Hash {
                 }
             }
 
+            // Check if every class file is processed
             if (num != size) {
                 System.out.println("Not all class structures are hashed in " + appPath);
                 return null;
@@ -46,7 +48,7 @@ public class Hash {
         return classesHash;
     }
 
-    //Hash file and put it into hashmap
+    // Hash file and put it into hashmap
     private static int hashSHA256(String appPath,ArrayList<String> classPath,String filePath,int num) {
         File file = new File(filePath);
         ReplaceIdent ri = new ReplaceIdent();
@@ -66,7 +68,9 @@ public class Hash {
                 }
 
                 if (line.charAt(0) == '}') {
-                    // Sort within class structure
+
+                    // Sort within class signature
+                    // Two class signatures could be identical but variables and methods defined are in different order, which would not be detected as clone
                     Collections.sort(list,String.CASE_INSENSITIVE_ORDER);
                     Iterator iterator = list.iterator();
                     while (iterator.hasNext()) {
@@ -104,7 +108,7 @@ public class Hash {
         
     }
 
-    //Convert hash value into hex string
+    // Convert hash value into hex string
     private static String toHexString(byte[] bytes) {
         StringBuilder hexString = new StringBuilder();
 
@@ -127,7 +131,7 @@ public class Hash {
                 System.out.println("Getting file: " + fileNum + "/" + total);
                 String filePath = resultset.getString("PATH");
                 String hexString = resultset.getString("HASH");
-                //Create folder to store files with same hash values
+                // Create folder to store files with same hash values
                 String outputDir = outputPath + "/" + hexString;
                 File storeDir = new File(outputDir);
                 if (!storeDir.exists()) {

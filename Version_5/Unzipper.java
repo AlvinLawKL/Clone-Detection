@@ -13,7 +13,7 @@ public class Unzipper {
     private static final int BUFFER_SIZE = 4096;
 
     //Apply unzip method to all files in a given directory
-    public static void unzipAll(String dirPath, String destPath,String fileTypeToCheck, String fileTypeToGet) {
+    public static void unzipAll(String dirPath, String destPath, String fileTypeToCheck, String fileTypeToGet) {
         File dir = new File(dirPath);
         File[] fileList = dir.listFiles();
         if (fileList != null) {
