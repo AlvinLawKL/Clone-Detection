@@ -3,6 +3,16 @@ Clone detection software for Android Applications, hashing class signatures from
 * Code: https://github.com/AlvinLawKL/Clone-Detection
 
 # Usage
+* Create database and table with the following columns (Name, Type) in PostgreSQL:
+    * path, varchar(500)
+    * hash, varchar(500)
+    * app, varchar(500)
+* Change the following variables in Processor.java
+    * dirPath: Absolute file path of folder that contain APKs.
+    * destPath: Absolute file path of output folder. Must not be the same as dirPath.
+    * d2jLocation: Absolute file path of dex2jar tool.
+    * javapLocation: Absolute file path of javap command.
+    * databaseName: The name of database created above.
 * Compile: javac Processor.java Version_"?"/\*.java ANTLR/\*.java
 * Run: java Processor
 
