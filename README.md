@@ -3,7 +3,7 @@ Clone detection software for Android Applications, hashing class signatures from
 * Code: https://github.com/AlvinLawKL/Clone-Detection
 
 # Usage
-* Compile: javac Processor.java Version_"?"/'*.java ANTLR/'*.java
+* Compile: javac Processor.java Version_"?"/\*.java ANTLR/\*.java
 * Run: java Processor
 
 # Version
