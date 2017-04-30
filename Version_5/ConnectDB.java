@@ -6,15 +6,14 @@ import java.util.Map;
 import java.util.ArrayList;
 
 public class ConnectDB {
-
-    public static Connection getDBConnection() { 
+    public static Connection getDBConnection(String database) { 
       try {
         // "Load" the JDBC driver
         Class.forName("org.postgresql.Driver"); 
 
         // Establish the connection to the database 
         String serverName = "localhost";
-        String databaseName = "clone_detection";
+        String databaseName = database;
         String url = "jdbc:postgresql://" + serverName + "/" + databaseName + "?autoReconnect=true&useSSL=false"; 
 
         String username = "postgres";

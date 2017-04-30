@@ -7,14 +7,13 @@ import java.util.ArrayList;
 
 public class ConnectDB {
 
-    public static Connection getDBConnection() { 
+    public static Connection getDBConnection(String databaseName) { 
       try {
         // "Load" the JDBC driver
         Class.forName("org.postgresql.Driver"); 
 
         // Establish the connection to the database 
         String serverName = "localhost";
-        String databaseName = "tool_time";
         String url = "jdbc:postgresql://" + serverName + "/" + databaseName + "?autoReconnect=true&useSSL=false"; 
 
         String username = "postgres";

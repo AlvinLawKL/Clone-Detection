@@ -6,15 +6,13 @@ import java.sql.*;
 import java.util.HashMap;
 
 public class Processor {
-
 	static String dirPath = "/Users/Alvin/Desktop/Test/Input";
 	static String destPath = "/Users/Alvin/Desktop/Test/Output";
 	static String d2jLocation = "/Users/Alvin/Desktop/FYP/Tool/Processor/dex2jar-2.0/d2j-dex2jar.sh";
 	static String javapLocation = "/Library/Java/JavaVirtualMachines/jdk1.8.0_101.jdk/Contents/Home/bin/javap";
+	static String databaseName = "clone_detection";
 
-	public static void main(String[] args) throws Exception {
-		long startTime = System.nanoTime();
-		
+	public static void main(String[] args) throws Exception {		
 		// Get all .dex files from APKs
 		Unzipper unzipper = new Unzipper();
 		unzipper.unzipAll(dirPath, destPath, ".*", ".dex");
@@ -35,14 +33,8 @@ public class Processor {
 		HashMap<String,ArrayList<String>> classesHash = hash.hashAll(appLists);
 		
 		ConnectDB connectDB = new ConnectDB();
-		Connection connect = connectDB.getDBConnection();
+		Connection connect = connectDB.getDBConnection(databaseName);
 		connectDB.insertIntoTable(connect,"time_1",classesHash);
 		connect.close();
-
-		long endTime = System.nanoTime();
-  		long runTime = endTime - startTime;
-		double runTimeInSec = (double)runTime/1000000000;
-		System.out.println("Run time is "+ runTimeInSec);
   	}
-
 }
